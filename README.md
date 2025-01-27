@@ -1,4 +1,7 @@
-# EquiNet-CNN
+# Back-Projection Diffusion
+Code for the preprint "Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models", available on ArXiv [here](https://arxiv.org/abs/2408.02866). 
+
+Written by [Borong Zhang](https://github.com/borongzhang), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google).
 
 ## Installation
 Project Environment can be installed by 
