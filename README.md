@@ -15,6 +15,40 @@ These two steps are also constrained to obey symmetries in the formulation while
 
 ![ROI_squares](https://github.com/user-attachments/assets/b7e93e52-c749-478e-bf6f-df7287045fd8)
 
+## Enviroment Setup
+Project Environment can be installed by 
+```
+conda create -n jaxflax_isp python=3.11 
+conda activate jaxflax_isp
+pip install git+https://github.com/google-research/swirl-dynamics.git@main
+pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+conda install jupyter matplotlib natsort 
+```
+
+## Sample Data and Trained Model Parameters
+todo
+We make a sample dataset publicly available [via Zenodo](). todo
+
+After downloading the data, please put the data folder in the root directory of the project, and put tmp folder in the src folder (optional).
+The following is the directory structure for the `back_projection_diffusion` project:
+
+```
+back_projection_diffusion/
+      ├── colab/
+      ├── data/
+      │   ├── 10hsquares_trainingdata/      # Contains training data for 10h squares
+      │   └── 10hsquares_testdata/          # Contains test data for 10h squares
+      ├── src/
+      │   └── tmp/                          # Contains trained model parameters
+      │       ├── equinet_cnn_10hsquares/      
+      │       ├── b_equinet_cnn_10hsquares/    
+      │       ├── analytical_cnn_10hsquares/  
+      │       └── switchnet_cnn_10hsquares/    
+```
+
+## Demos
+Demos for these models can be found in the `colabs` folder.
+
 ## Citation
 
 If this code is useful to your research, please cite our preprint:
@@ -30,19 +64,3 @@ If this code is useful to your research, please cite our preprint:
 }
 ```
 
-## Installation
-Project Environment can be installed by 
-```
-conda create -n jaxflax_isp python=3.11 
-conda activate jaxflax_isp
-pip install git+https://github.com/google-research/swirl-dynamics.git@main
-pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-conda install jupyter matplotlib natsort 
-```
-
-## Data and Trained Model Parameters
-After downloading the data, please put the data folder in the root directory of the project.
-
-
-## Demos
-Demos for these models can be found in the `colabs` folder.
