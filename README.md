@@ -3,6 +3,33 @@ Code for the preprint "Back-Projection Diffusion: Solving the Wideband Inverse S
 
 Written by [Borong Zhang](https://github.com/borongzhang), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google).
 
+We present Wideband back-projection diffusion, an end-to-end probabilistic framework for approximating the posterior distribution induced by the inverse scattering map from wideband scattering data. 
+
+<img width="1228" alt="prelim" src="https://github.com/user-attachments/assets/e21c10e4-a451-424e-a7c2-a785a207a4d4" />
+
+This framework leverages conditional diffusion models coupled with the underlying physics of wave-propagation and symmetries in the problem, to produce highly accurate reconstructions. The framework introduces a factorization of the score function into a physics-based latent representation inspired by the filtered back-propagation formula and a conditional score function conditioned on this latent representation. 
+
+<img width="1133" alt="diagram" src="https://github.com/user-attachments/assets/a185576e-75b7-42d3-a83d-bf5e4e3fe0a5" />
+
+These two steps are also constrained to obey symmetries in the formulation while being amenable to compression by imposing the rank structure found in the filtered back-projection formula. As a result, empirically, our framework is able to provide sharp reconstructions effortlessly, even recovering sub-Nyquist features in the multiple-scattering regime. It has low-sample and computational complexity, its number of parameters scales sub-linearly with the target resolution, and it has stable training dynamics.
+
+![ROI_squares](https://github.com/user-attachments/assets/b7e93e52-c749-478e-bf6f-df7287045fd8)
+
+## Citation
+
+If this code is useful to your research, please cite our preprint:
+```
+@misc{zhang2024backprojectiondiffusionsolvingwideband,
+      title={Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models}, 
+      author={Borong Zhang and Martín Guerra and Qin Li and Leonardo Zepeda-Núñez},
+      year={2024},
+      eprint={2408.02866},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2408.02866}, 
+}
+```
+
 ## Installation
 Project Environment can be installed by 
 ```
@@ -13,8 +40,9 @@ pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-re
 conda install jupyter matplotlib natsort 
 ```
 
-## Data
+## Data and Trained Model Parameters
 After downloading the data, please put the data folder in the root directory of the project.
+
 
 ## Demos
 Demos for these models can be found in the `colabs` folder.
