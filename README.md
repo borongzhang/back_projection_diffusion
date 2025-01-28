@@ -59,8 +59,8 @@ eta.h5/
       ├── /eta
 ```
 
-Then, scattering data can be generated using the `data_generation.m` scripts.
-The dimension, size, and frequencies of the perturbations should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
+Then, scattering data can be generated using the `data_generation.m` script.
+The dimension, size, and frequencies of the data should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
 ```
 scatter.h5/
       ├── /scatter_imag_freq_1
