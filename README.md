@@ -48,13 +48,38 @@ back_projection_diffusion/
 ## Demos
 Demos for these models can be found in the `colabs` folder.
 
+## Data Generation
+Datasets can be generated using the MATLAB code in the `data_generation` folder.
+
+Synthetic perturbations: `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
+
+The resolution and number of perturbations should be specified in the `setup scaling parameters` section. The generated perturbations will be stored as an HDF5 file with the following structure:
+```
+eta.h5/
+      ├── /eta
+```
+
+Then, scattering data can be generated using the `data_generation.m` scripts.
+The dimension, size, and frequencies of the perturbations should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
+```
+scatter.h5/
+      ├── /scatter_imag_freq_1
+      ├── /scatter_real_freq_1
+      ├── /scatter_imag_freq_2
+      ├── /scatter_real_freq_2
+      ├── /scatter_imag_freq_3
+      ├── /scatter_real_freq_3
+```
+
+Finally, move the `eta.h5` and `scatter.h5` files into a folder, and move that folder to the data directory.
+
+
 ## Comments
 
 The following files will be included in a future update:
 ```
-1. Scripts for data generation
+1. Brain MRI dataset
 2. EquiNet-UViT, WideBNet-CNN, and etc 
-3. Brain MRI dataset
 ```
 We are also planning a revision to improve the code running speed.
 
