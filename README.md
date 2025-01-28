@@ -73,6 +73,7 @@ scatter.h5/
 
 Finally, move the `eta.h5` and `scatter.h5` files into a folder, and move that folder to the data directory.
 
+## MRI brain dataset
 
 ## Comments
 
