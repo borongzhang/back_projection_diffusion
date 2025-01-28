@@ -46,7 +46,7 @@ back_projection_diffusion/
 ```
 
 ## Demos
-Demos for these models can be found in the `colabs` folder.
+Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.
 
 ## Data Generation
 Datasets can be generated using the MATLAB code in the `data_generation` folder.
