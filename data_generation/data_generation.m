@@ -9,18 +9,18 @@ N = 80;
 Ntheta = N;
 
 % Size of the scattering data
-n = 21500;
+n = 500;
 
 % Three frequencies of the data
-freq_1 = 2.5
-freq_2 = 5.0
-freq_3 = 10.0
+freq_1 = 2.5;
+freq_2 = 5.0;
+freq_3 = 10.0;
 
 % Directory to load the perturbation
-dir_load = '?/eta.h5';
+dir_load = 'eta.h5';
 
 % Directory to save the scattering data
-dir_save = '?/scatter.h5';
+dir_save = 'scatter.h5';
 
 %% setup the model and the domain
 
@@ -91,16 +91,15 @@ scatter_imag_freq_2 = zeros(Ntheta^2, n);
 scatter_real_freq_3 = zeros(Ntheta^2, n);
 scatter_imag_freq_3 = zeros(Ntheta^2, n);
 %%
-omega1 = freq1*2*pi;
-omega2 = freq2*2*pi;
-omega3 = freq3*2*pi;
+omega1 = freq_1*2*pi;
+omega2 = freq_2*2*pi;
+omega3 = freq_3*2*pi;
 U_in1 = exp(1i*omega1*(X(:)*d(:,1).'+ Y(:)*d(:,2).'));
 U_in2 = exp(1i*omega2*(X(:)*d(:,1).'+ Y(:)*d(:,2).'));
 U_in3 = exp(1i*omega3*(X(:)*d(:,1).'+ Y(:)*d(:,2).'));
-%%
-parpool(16);
+
 %%   
-parfor i = 1:n
+for i = 1:n
     i
     eta = etas(:,i);
     
@@ -141,6 +140,9 @@ parfor i = 1:n
     scatter_imag_freq_3(:,i) = imag(reshape(scatter3, Ntheta^2, 1));
 end
 
+%%
+figure
+DisplayField(scatter_imag_freq_2(:,8),xi,yi,0)
 
 %%
 h5create(dir_save,'/scatter_imag_freq_1',[Ntheta^2, n]);
