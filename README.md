@@ -22,6 +22,7 @@ pip install git+https://github.com/google-research/swirl-dynamics.git@main
 pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 conda install jupyter matplotlib natsort 
 ```
+The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
 
 ## Sample Data and Trained Model Parameters
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14745154)
@@ -49,7 +50,7 @@ back_projection_diffusion/
 Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.
 
 ## Data Generation
-Datasets can be generated using the MATLAB code in the `data_generation` folder.
+Datasets can be generated using the MATLAB code in the `data_generation` folder. 
 
 Synthetic perturbations: `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
 
@@ -74,6 +75,12 @@ scatter.h5/
 Finally, move the `eta.h5` and `scatter.h5` files into a folder, and move that folder to the data directory.
 
 ## MRI brain dataset
+
+## Credits
+
+This repository makes use of code from the following sources:
+1. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
+2. [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276), where additional data generation code was provided by the authors.
 
 ## Comments
 
