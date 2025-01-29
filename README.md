@@ -24,7 +24,7 @@ conda install jupyter matplotlib natsort
 ```
 The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
 
-## Sample Data and Trained Model Parameters
+## Sample Dataset and Trained Model Parameters
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14745154)
 
 We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14745154). 
@@ -49,10 +49,13 @@ back_projection_diffusion/
 ## Demos
 Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.
 
-## Data Generation
+## Datasets
 Datasets can be generated using the MATLAB code in the `data_generation` folder. 
 
-Synthetic perturbations: `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
+### Synthetic perturbations
+
+Perturbations `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
+![synthetic_media](https://github.com/user-attachments/assets/d4fe637e-bf80-4a40-8678-af30a45ebf3a)
 
 The resolution and number of perturbations should be specified in the `setup scaling parameters` section. The generated perturbations will be stored as an HDF5 file with the following structure:
 ```
@@ -60,7 +63,19 @@ eta.h5/
       ├── /eta
 ```
 
-Then, scattering data can be generated using the `data_generation.m` script.
+### MRI brain perturbations 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14760123) 
+
+The Brain MRI images used as our perturbations are obtained from the [NYU fastMRI Initiative database](https://fastmri.med.nyu.edu/). We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
+
+![MRI Brain Samples](https://github.com/user-attachments/assets/49f9e96b-dfe1-4560-8a9e-9a824a866118) 
+
+We make the MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
+
+
+### Scattering Data Generation
+
+Scattering data can be generated using the `data_generation.m` script.
 The dimension, size, and frequencies of the data should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
 ```
 scatter.h5/
@@ -72,9 +87,8 @@ scatter.h5/
       ├── /scatter_real_freq_3
 ```
 
-Finally, move the `eta.h5` and `scatter.h5` files into a folder, and move that folder to the data directory.
+To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that folder to the `data` directory.
 
-## MRI brain dataset
 
 ## Credits
 
@@ -86,7 +100,7 @@ This repository makes use of code from the following sources:
 
 The following files will be included in a future update:
 ```
-1. Brain MRI dataset
+1. FWI and Least Square methods.
 2. EquiNet-UViT, WideBNet-CNN, and etc 
 ```
 We are also planning a revision to improve the code running speed.
