@@ -47,7 +47,7 @@ back_projection_diffusion/
 ```
 
 ## Demos
-Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.
+Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
 
 ## Datasets
 Datasets can be generated using the MATLAB code in the `data_generation` folder. 
@@ -73,7 +73,6 @@ The Brain MRI images used as our perturbations were obtained from the [NYU fastM
 We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
 
 We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
-
 
 ### Scattering Data Generation
 
