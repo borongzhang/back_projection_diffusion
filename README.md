@@ -66,11 +66,13 @@ eta.h5/
 ### MRI Brain Perturbations 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14760123) 
 
-The Brain MRI images used as our perturbations are obtained from the [NYU fastMRI Initiative database](https://fastmri.med.nyu.edu/). We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
+The Brain MRI images used as our perturbations were obtained from the [NYU fastMRI Initiative database](https://fastmri.med.nyu.edu/), as described in the works of Florian Knoll et al., fastmri: A publicly available raw k-space and dicom dataset of knee images for accelerated mr image reconstruction using machine learning, 2020, and Jure Zbontar et al., fastmri: An open dataset and benchmarks for accelerated mri, 2019. As such, NYU fastMRI investigators provided the data but did not participate in the analysis or writing of this report. A listing of NYU fastMRI investigators, subject to updates, can be found at fastmri.med.nyu.edu. The primary goal of fastMRI is to test whether machine learning can aid in the reconstruction of medical images.
 
 ![MRI Brain Samples](https://github.com/user-attachments/assets/49f9e96b-dfe1-4560-8a9e-9a824a866118) 
 
-We make the MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
+We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
+
+We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
 
 
 ### Scattering Data Generation
