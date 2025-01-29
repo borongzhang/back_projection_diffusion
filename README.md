@@ -52,7 +52,7 @@ Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` t
 ## Datasets
 Datasets can be generated using the MATLAB code in the `data_generation` folder. 
 
-### Synthetic perturbations
+### Synthetic Perturbations
 
 Perturbations `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
 ![synthetic_media](https://github.com/user-attachments/assets/d4fe637e-bf80-4a40-8678-af30a45ebf3a)
@@ -63,7 +63,7 @@ eta.h5/
       ├── /eta
 ```
 
-### MRI brain perturbations 
+### MRI Brain Perturbations 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14760123) 
 
 The Brain MRI images used as our perturbations are obtained from the [NYU fastMRI Initiative database](https://fastmri.med.nyu.edu/). We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
