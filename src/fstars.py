@@ -15,7 +15,7 @@ class analytical_fstar(nn.Module):
                                   where the last dimension represents real and imaginary parts.
 
         Returns:
-            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 2] by the application of the equivariant adjoint forward operaor,
+            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 2] by the application of the analytical back-scattering operator,
                          where the last dimension contains the real and imaginary parts of the result.
         """
         Lambda = jnp.reshape(inputs,[-1, 6400, 2])
@@ -61,7 +61,7 @@ class equinet_fstar(nn.Module):
                                   where the last dimension represents real and imaginary parts.
 
         Returns:
-            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the equivariantly appeoximated adjoint forward operaor.
+            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the equivariantly approximated back-scattering operator.
         """
         # Separate real and imaginary parts of inputs
         R, I = inputs[:, :, 0], inputs[:, :, 1]
@@ -364,7 +364,7 @@ class b_equinet_fstar(nn.Module):
                                   where the last dimension represents real and imaginary parts.
 
         Returns:
-            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the equivariantly appeoximated adjoint forward operaor.
+            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the equivariantly approximated back-scattering operator.
                             Compressed by the butterfly factorizaiton.
         """
         y = inputs.take(self.r_index, axis=1)
@@ -432,7 +432,7 @@ class switchnet_fstar(nn.Module):
                                   where the last dimension represents real and imaginary parts.
 
         Returns:
-            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the adjoint forward operaor.
+            jnp.ndarray: Outputs of shape [batch_size, 80, 80, 1] by the application of the back-scattering operator.
                             Approximated by the SwitchNet.
         """
         batch_size = x.shape[0]
