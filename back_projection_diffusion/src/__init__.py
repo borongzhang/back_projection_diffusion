@@ -1,7 +1,7 @@
 # back_projection_diffusion/__init__.py
 
-# Import everything from denoiser.py
-from .denoiser import (
+# Import everything from fstar_cnn.py
+from .fstar_cnn import (
     AdaptiveScale,
     ConvBlock,
     FourierEmbedding,
@@ -11,8 +11,8 @@ from .denoiser import (
     PreconditionedDenoiser,
 )
 
-# Import everything from fstar.py
-from .fstar import (
+# Import everything from fstars.py
+from .fstars import (
     analytical_fstar,
     equinet_fstar,
     V,
@@ -25,8 +25,8 @@ from .fstar import (
     switchnet_fstar,
 )
 
-# Import everything from transformations.py
-from .transformations import (
+# Import everything from utils.py
+from .utils import (
     rotationindex,
     SparsePolarToCartesian,
     SparseCartesianToPolar,
