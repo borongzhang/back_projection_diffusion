@@ -14,11 +14,9 @@ These two steps are also constrained to obey symmetries in the formulation while
 ## Enviroment Setup
 Project Environment can be installed by 
 ```
-conda create -n jaxflax_isp python=3.11 
-conda activate jaxflax_isp
-pip install git+https://github.com/google-research/swirl-dynamics.git@057c93cebc3c8ccac996bc5a5b49c88e3e39c4b0
-pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-conda install jupyter matplotlib natsort 
+conda create -n back_projection_diffusion python=3.11 
+conda activate back_projection_diffusion
+pip install git+https://github.com/borongzhang/back_projection_diffusion.git@main
 ```
 
 ## Sample Dataset and Trained Model Parameters
