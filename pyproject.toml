@@ -45,6 +45,8 @@ dependencies = [
 ]
 
 # `version` is automatically set by flit to use `swirl_dynamics.__version__`
+
+packages = ["back_projection_diffusion"]
 dynamic = ["version"]
 
 [project.urls]
