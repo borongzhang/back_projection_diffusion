@@ -24,32 +24,33 @@ pip install git+https://github.com/borongzhang/back_projection_diffusion.git@mai
 
 We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14745154). 
 
-After downloading the data, please put the datasets in the data folder, and put tmp folder in the src folder (optional).
-The following is the directory structure for the `back_projection_diffusion` project:
+After downloading the data, by default, please place the datasets in a data folder and the tmp folder in the examples folder (optional).
+To change the data directory, modify `training_data_path` and `test_data_path`. To change the directory for the trained model parameters, modify `cond_workdir`.
+The following is the default directory structure for the `back_projection_diffusion` project:
 
 ```
 back_projection_diffusion/
-      ├── colab/
-      ├── data/
-      │   ├── 10hsquares_trainingdata/      # Contains training data for 10h squares
-      │   └── 10hsquares_testdata/          # Contains test data for 10h squares
-      ├── src/
+      ├── examples/
       │   └── tmp/                          # Contains trained model parameters
       │       ├── equinet_cnn_10hsquares/      
       │       ├── b_equinet_cnn_10hsquares/    
       │       ├── analytical_cnn_10hsquares/  
-      │       └── switchnet_cnn_10hsquares/    
+      │       └── switchnet_cnn_10hsquares/ 
+      ├── data/
+      │   ├── 10hsquares_trainingdata/      # Contains training data for 10h squares
+      │   └── 10hsquares_testdata/          # Contains test data for 10h squares
+      └── src/
 ```
 
 ## Demos
-Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `colabs` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
+Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
 
 ## Datasets
 Datasets can be generated using the MATLAB code in the `data_generation` folder. 
 
 ### Synthetic Perturbations
-
 Perturbations `Shepp-Logan`, `3-5-10h Triangles`, and `10h Overlapping Squares` can be generated using the corresponding `eta_generation_?.m` scripts.
+
 ![synthetic_media](https://github.com/user-attachments/assets/d4fe637e-bf80-4a40-8678-af30a45ebf3a)
 
 The resolution and number of perturbations should be specified in the `setup scaling parameters` section. The generated perturbations will be stored as an HDF5 file with the following structure:
@@ -70,7 +71,6 @@ We padded, resized, and normalized the perturbations to a native resolution of $
 We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
 
 ### Scattering Data Generation
-
 Scattering data can be generated using the `data_generation.m` script.
 The dimension, size, and frequencies of the data should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
 ```
@@ -85,16 +85,13 @@ scatter.h5/
 
 To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that folder to the `data` directory.
 
-
 ## Credits
-
 This repository makes use of code from the following sources:
 1. The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
 2. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
 3. Original data generation code was provided by the authors of [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276).
 
 ## Citation
-
 If this code is useful to your research, please cite our preprint:
 ```
 @misc{zhang2024backprojectiondiffusionsolvingwideband,
