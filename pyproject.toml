@@ -39,7 +39,6 @@ dependencies = [
   "xarray",
   "xarray_tensorstore",
   "pyyaml",
-  "jax[cuda12_pip] @ https://storage.googleapis.com/jax-releases/jax_cuda_releases.html",
   "pysteps",
   "ott-jax==0.4.7",
 ]
