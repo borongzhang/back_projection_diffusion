@@ -6,7 +6,7 @@ requires-python = ">=3.11"
 license = {file = "LICENSE"}
 authors = [
   {name = "Borong Zhang", email="borongzhang@yahoo.com"},
-][
+]
 
 dependencies = [
   # Install swirl-dynamics from a specific commit using the VCS dependency syntax
