@@ -20,7 +20,6 @@ pip install git+https://github.com/google-research/swirl-dynamics.git@057c93cebc
 pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 conda install jupyter matplotlib natsort 
 ```
-The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
 
 ## Sample Dataset and Trained Model Parameters
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14745154)
@@ -92,8 +91,9 @@ To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that 
 ## Credits
 
 This repository makes use of code from the following sources:
-1. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
-2. [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276), where additional data generation code was provided by the authors.
+1. The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
+2. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
+3. Original data generation code was provided by the authors of [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276).
 
 ## Citation
 
