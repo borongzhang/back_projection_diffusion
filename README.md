@@ -1,7 +1,5 @@
 # Back-Projection Diffusion (Under Construction)
-Code for the preprint "Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models", available on ArXiv [here](https://arxiv.org/abs/2408.02866). 
-
-Written by [Borong Zhang](https://borongzhang.com/), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google).
+Code for the preprint "Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models", available on ArXiv [here](https://arxiv.org/abs/2408.02866) by [Borong Zhang](https://borongzhang.com/), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google).
 
 We present Wideband back-projection diffusion, an end-to-end probabilistic framework for approximating the posterior distribution induced by the inverse scattering map from wideband scattering data. 
 
@@ -96,15 +94,6 @@ To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that 
 This repository makes use of code from the following sources:
 1. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
 2. [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276), where additional data generation code was provided by the authors.
-
-## Comments
-
-The following files will be included in a future update:
-```
-1. FWI and Least Square methods.
-2. EquiNet-UViT, WideBNet-CNN, and etc 
-```
-We are also planning a revision to improve the code running speed.
 
 ## Citation
 
