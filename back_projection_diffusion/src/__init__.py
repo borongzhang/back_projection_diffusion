@@ -1,4 +1,4 @@
-# Copyright 2024 Borong Zhang.
+# Copyright 2024 Borong Zhang
 #
 # Licensed under the MIT License (the "License");
 # you may not use this file except in compliance with the License.
