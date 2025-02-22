@@ -17,7 +17,8 @@ Project Environment can be installed by
 conda create -n back_projection_diffusion python=3.11 
 conda activate back_projection_diffusion
 pip install git+https://github.com/borongzhang/back_projection_diffusion.git@main
-pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html # For using GPU
+# For using GPU
+pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html 
 ```
 
 ## Sample Dataset and Trained Model Parameters
