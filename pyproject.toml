@@ -1,27 +1,58 @@
 [project]
 name = "back_projection_diffusion"
+version = "0.1.0"
 description = "Solving Inverse Scattering Problem with Diffusion Models"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 authors = [
-  {name = "Borong Zhang", email="borongzhang@yahoo.com"},
+  { name = "Borong Zhang", email = "borongzhang@yahoo.com" }
 ]
-
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: Apache Software License",
+  "Intended Audience :: Science/Research"
+]
+keywords = [
+  "diffusion", "machine learning", "jax", "inverse scattering problem"
+]
 dependencies = [
-  # Install swirl-dynamics from a specific commit using the VCS dependency syntax
-  "swirl-dynamics @ git+https://github.com/google-research/swirl-dynamics.git@057c93cebc3c8ccac996bc5a5b49c88e3e39c4b0",
+  # Install the package from Git at the specified branch/commit
+  "back_projection_diffusion @ git+https://github.com/borongzhang/back_projection_diffusion.git@main",
   "jupyter",
   "matplotlib",
   "natsort",
   "pysteps",
   "ott-jax==0.4.7"
 ]
+packages = [
+  { include = "back_projection_diffusion.src" }
+]
 
 [project.urls]
 homepage = "https://borongzhang.com/"
 repository = "https://github.com/borongzhang/back_projection_diffusion"
 
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-xdist",
+  "pylint>=2.6.0",
+  "pyink"
+]
+
+[tool.pyink]
+line-length = 80
+preview = true
+pyink-indentation = 2
+pyink-use-majority-quotes = true
+
 [build-system]
 requires = ["flit_core >=3.8,<4"]
 build-backend = "flit_core.buildapi"
+
+[tool.flit.sdist]
+exclude = [
+  "**/*_test.py"
+]
