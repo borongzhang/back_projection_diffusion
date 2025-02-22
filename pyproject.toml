@@ -15,7 +15,7 @@ classifiers = [
   "Intended Audience :: Science/Research"
 ]
 keywords = [
-  "diffusion", "machine learning", "jax", "inverse scattering problem"
+  "diffusion", "machine learning", "jax", "flax", "inverse scattering problem"
 ]
 dependencies = [
   # Install swirl-dynamics from a specific commit.
@@ -29,6 +29,7 @@ dependencies = [
 packages = [
   { include = "back_projection_diffusion.src" }
 ]
+
 [project.urls]
 homepage = "https://borongzhang.com/"
 repository = "https://github.com/borongzhang/back_projection_diffusion"
