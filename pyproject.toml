@@ -40,6 +40,8 @@ dependencies = [
   "ott-jax==0.4.7",
 ]
 
+packages = [{include = "back_projection_diffusion.src"}]
+
 dynamic = ["version"]
 
 [project.urls]
