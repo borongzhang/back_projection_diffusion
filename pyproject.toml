@@ -18,8 +18,8 @@ keywords = [
   "diffusion", "machine learning", "jax", "inverse scattering problem"
 ]
 dependencies = [
-  # Install the package from Git at the specified branch/commit
-  "back_projection_diffusion @ git+https://github.com/borongzhang/back_projection_diffusion.git@main",
+  # Install swirl-dynamics from a specific commit.
+  "swirl-dynamics @ git+https://github.com/google-research/swirl-dynamics.git@057c93cebc3c8ccac996bc5a5b49c88e3e39c4b0",
   "jupyter",
   "matplotlib",
   "natsort",
