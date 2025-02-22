@@ -26,9 +26,7 @@ dependencies = [
   "pysteps",
   "ott-jax==0.4.7"
 ]
-packages = [
-  { include = "back_projection_diffusion.src" }
-]
+
 
 [project.urls]
 homepage = "https://github.com/borongzhang/back_projection_diffusion"
