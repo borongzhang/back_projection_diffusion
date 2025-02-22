@@ -24,9 +24,9 @@ pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-re
 Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `examples` folder.  
 
 ### Sample Dataset and Trained Model Parameters
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14745154)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14911327)
 
-We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14745154). 
+We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14911327). 
 
 After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
 
