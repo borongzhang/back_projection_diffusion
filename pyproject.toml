@@ -18,7 +18,6 @@ keywords = [
   "diffusion", "machine learning", "jax", "inverse scattering problem"
 ]
 dependencies = [
-  # Install swirl-dynamics from a specific commit.
   "swirl-dynamics @ git+https://github.com/google-research/swirl-dynamics.git@057c93cebc3c8ccac996bc5a5b49c88e3e39c4b0",
   "jupyter",
   "matplotlib",
@@ -26,7 +25,6 @@ dependencies = [
   "pysteps",
   "ott-jax==0.4.7"
 ]
-packages = [{ include = "src" }]
 
 [project.urls]
 homepage = "https://borongzhang.com/"
@@ -49,6 +47,10 @@ pyink-use-majority-quotes = true
 [build-system]
 requires = ["flit_core >=3.8,<4"]
 build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "back_projection_diffusion"
+from = "src"
 
 [tool.flit.sdist]
 exclude = [
