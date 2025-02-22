@@ -31,7 +31,7 @@ packages = [
 ]
 
 [project.urls]
-homepage = "https://borongzhang.com/"
+homepage = "https://github.com/borongzhang/back_projection_diffusion"
 repository = "https://github.com/borongzhang/back_projection_diffusion"
 
 [project.optional-dependencies]
