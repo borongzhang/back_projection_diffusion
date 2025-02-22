@@ -24,7 +24,7 @@ pip install --upgrade "jax[cuda12_pip]" -f https://storage.googleapis.com/jax-re
 Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` trained on the `10h Overlapping Squares` dataset can be found in the `examples` folder.  
 
 ### Sample Dataset and Trained Model Parameters
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14911327)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14911327.svg)](https://doi.org/10.5281/zenodo.14911327)
 
 We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14911327). 
 
@@ -63,7 +63,7 @@ eta.h5/
 
 ### MRI Brain Perturbations 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14745154.svg)](https://doi.org/10.5281/zenodo.14760123) 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14760123.svg)](https://doi.org/10.5281/zenodo.14760123) 
 
 The Brain MRI images used as our perturbations were obtained from the [NYU fastMRI Initiative database](https://fastmri.med.nyu.edu/), as described in the works of Florian Knoll et al., fastmri: A publicly available raw k-space and dicom dataset of knee images for accelerated mr image reconstruction using machine learning, 2020, and Jure Zbontar et al., fastmri: An open dataset and benchmarks for accelerated mri, 2019. As such, NYU fastMRI investigators provided the data but did not participate in the analysis or writing of this report. A listing of NYU fastMRI investigators, subject to updates, can be found at fastmri.med.nyu.edu. The primary goal of fastMRI is to test whether machine learning can aid in the reconstruction of medical images.
 
