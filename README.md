@@ -7,7 +7,7 @@ We present Wideband back-projection diffusion, an end-to-end probabilistic frame
 
 This framework leverages conditional diffusion models coupled with the underlying physics of wave-propagation and symmetries in the problem, to produce highly accurate reconstructions. The framework introduces a factorization of the score function into a physics-based latent representation inspired by the filtered back-propagation formula and a conditional score function conditioned on this latent representation. 
 
-<img width="1133" alt="diagram" src="https://github.com/user-attachments/assets/a185576e-75b7-42d3-a83d-bf5e4e3fe0a5" />
+<img width="1121" alt="diagram" src="https://github.com/user-attachments/assets/add61dfe-a3cb-4d4f-8cb0-b923293d5134" />
 
 These two steps are also constrained to obey symmetries in the formulation while being amenable to compression by imposing the rank structure found in the filtered back-projection formula. As a result, empirically, our framework is able to provide sharp reconstructions effortlessly, even recovering sub-Nyquist features in the multiple-scattering regime. It has low-sample and computational complexity, its number of parameters scales sub-linearly with the target resolution, and it has stable training dynamics.
 
