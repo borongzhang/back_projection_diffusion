@@ -3,20 +3,22 @@ name = "back_projection_diffusion"
 description = "Solving Inverse Scattering Problem with Diffusion Models"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 authors = [
-  {name = "Borong Zhang", email="borongzhang@yahoo.com"},
+  { name = "Borong Zhang", email = "borongzhang@yahoo.com" },
 ]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "License :: OSI Approved :: Apache Software License",
-    "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: Apache Software License",
+  "Intended Audience :: Science/Research",
 ]
 keywords = [
-  "diffusion", "machine learning", "jax", "inverse scattering problem"
+  "diffusion",
+  "machine learning",
+  "jax",
+  "inverse scattering problem"
 ]
-
 dependencies = [
   "absl-py",
   "chex",
@@ -37,11 +39,11 @@ dependencies = [
   "xarray_tensorstore",
   "pyyaml",
   "pysteps",
-  "ott-jax==0.4.7",
+  "ott-jax==0.4.7"
 ]
-
-packages = [{include = "back_projection_diffusion.src"}]
-
+packages = [
+  { include = "back_projection_diffusion.src" }
+]
 dynamic = ["version"]
 
 [project.urls]
@@ -50,10 +52,10 @@ repository = "https://github.com/borongzhang/back_projection_diffusion"
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "pytest-xdist",
-    "pylint>=2.6.0",
-    "pyink",
+  "pytest",
+  "pytest-xdist",
+  "pylint>=2.6.0",
+  "pyink"
 ]
 
 [tool.pyink]
@@ -68,5 +70,5 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.sdist]
 exclude = [
-  "**/*_test.py",
+  "**/*_test.py"
 ]
