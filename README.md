@@ -96,6 +96,7 @@ This repository makes use of code from the following sources:
 1. The code in this repository is largely based on [Swirl-Dynamics](https://github.com/google-research/swirl-dynamics).
 2. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
 3. Original data generation code was provided by the authors of [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276).
+4. The structure of the repository is inspired by Owen Melia and Olivia Tsang‘s [repository](https://github.com/meliao/MFISNets/).
 
 ## Citation
 If this code is useful to your research, please cite our preprint:
