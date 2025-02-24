@@ -1,5 +1,5 @@
 # Back-Projection Diffusion
-This repository contains the code for the main models described in “Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models”, which is available on [ArXiv](https://arxiv.org/abs/2408.02866). The paper is authored by [Borong Zhang](https://borongzhang.com/), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google).   
+This repository contains the code for the main models described in “Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models”, which is available on [ArXiv](https://arxiv.org/abs/2408.02866). The paper is authored by [Borong Zhang](https://borongzhang.com/), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google). This repository is written by Borong Zhang.
 
 We present Wideband back-projection diffusion, an end-to-end probabilistic framework for approximating the posterior distribution induced by the inverse scattering map from wideband scattering data. 
 
