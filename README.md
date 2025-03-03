@@ -89,7 +89,7 @@ scatter.h5/
 To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that folder to the `data` directory.
 
 ## Baseline Models
-We have made the baseline deterministic models, the vanilla diffusion model, and the code for metrics used for comparison publicly available in the [repository](https://github.com/borongzhang/ISP_baseline).
+We have made the baseline deterministic models, and the U-ViT diffusion model publicly available in the [repository](https://github.com/borongzhang/ISP_baseline).
 
 ## Credits
 This repository makes use of code from the following sources:
