@@ -198,7 +198,7 @@ def load_eta_data(data_path, N, blur_sigma, normalize=False):
             eta (np.ndarray): Processed (but not normalized) eta data.
     """
     # Open the file and load the raw η data
-    with h5py.File(f'{data_path}/eta.h5', 'r') as f:
+    with h5py.File(data_path, 'r') as f:
         raw_eta = f[list(f.keys())[0]][:N, :]
         # Determine the spatial dimension (assumes square images)
         neta = int(np.sqrt(raw_eta.shape[1]))
@@ -244,7 +244,7 @@ def load_scatter_data(data_path, N, scatter_norm_constants=None):
             scatter (np.ndarray): Normalized scatter data.
     """
     # Open the HDF5 file and read the keys in natural sorted order.
-    with h5py.File(f'{data_path}/scatter.h5', 'r') as f:
+    with h5py.File(data_path, 'r') as f:
         keys = natsort.natsorted(f.keys())
         
         # Process the real part from keys[3], keys[4], keys[5]
