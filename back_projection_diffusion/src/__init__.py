@@ -34,7 +34,7 @@ from back_projection_diffusion.src.fstars import (
   U,
   BEquinetFstar,
   DMLayer,
-  SwitchnetFstar,
+  SwitchNetFstar,
 )
 
 # Import everything from utils.py.
