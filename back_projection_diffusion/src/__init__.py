@@ -43,4 +43,8 @@ from back_projection_diffusion.src.utils import (
   sparse_polar_to_cartesian,
   sparse_cartesian_to_polar,
   compute_f_adj,
+  count_params,
+  load_eta_data,
+  load_scatter_data,
+  create_dataset,
 )

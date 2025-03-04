@@ -284,3 +284,27 @@ def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
   dataset = dataset.batch(batch_size)
   dataset = dataset.prefetch(tf.data.AUTOTUNE)
   return dataset.as_numpy_iterator()
+
+def count_params(params: dict, parent_name: str = "") -> int:
+  """Recursively counts the number of parameters in the JAX model.
+
+  Args:
+    params: A dictionary of model parameters.
+    parent_name: The name of the parent module.
+
+  Returns:
+    int: The total number of parameters.
+  """
+  total_params = 0
+  for key, value in params.items():
+    layer_name = f"{parent_name}/{key}" if parent_name else key
+    if isinstance(value, dict):
+      # Recurse into nested dictionary.
+      layer_params = count_params(value, layer_name)
+      total_params += layer_params
+    else:
+      # Assume value is a parameter array.
+      layer_params = value.size
+      total_params += layer_params
+      print(f"Layer: {layer_name}, Parameters: {layer_params}")
+  return total_params
