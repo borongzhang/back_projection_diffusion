@@ -179,71 +179,140 @@ def compute_F_adj(freq):
 
     return F.conj().T
 
-def load_and_preprocess_data(data_path, NTRAIN, neta, blur_sigma):
+def load_eta_data(data_path, N, blur_sigma, normalize=False):
     """
-    Load and preprocess eta (perturbation) and scatter data from the specified data path,
-    and return the normalizing constants used for both datasets.
+    Load and process η (eta) data from an HDF5 file.
 
     Parameters:
-        data_path (str): Path to the folder containing 'eta.h5' and 'scatter.h5'.
-        NTRAIN (int): Number of training samples to load.
-        neta (int): The dimension used to reshape the eta data.
+        data_path (str): Path to the folder containing 'eta.h5'.
+        N (int): Number of samples to load.
         blur_sigma (float): Sigma value for the Gaussian blur.
+        normalize (bool): If True, normalize the data and return the normalization constants.
 
     Returns:
-        eta_re (np.ndarray): Preprocessed eta data.
-        scatter (np.ndarray): Preprocessed scatter data.
-        eta_norm_constants (tuple): (mean_eta, std_eta) used for eta normalization.
-        scatter_norm_constants (list of tuples): List containing (mean, std) for each scatter channel.
+        If normalize is True:
+            eta (np.ndarray): Normalized eta data.
+            mean_eta (np.ndarray): Mean computed from the data.
+            std_eta (float): Standard deviation computed from the data.
+        If normalize is False:
+            eta (np.ndarray): Processed (but not normalized) eta data.
     """
-
+    # Open the file and load the raw η data
     with h5py.File(f'{data_path}/eta.h5', 'r') as f:
-        # Read eta data from the first key, limit to NTRAIN samples and reshape
-        eta_re = f[list(f.keys())[0]][:NTRAIN, :].reshape(-1, neta, neta)
-        # Define a blur function using the provided sigma
+        raw_eta = f[list(f.keys())[0]][:N, :]
+        # Determine the spatial dimension (assumes square images)
+        neta = int(np.sqrt(raw_eta.shape[1]))
+        # Reshape raw data into (N, neta, neta)
+        eta = raw_eta.reshape(-1, neta, neta)
+        # Apply Gaussian blur (transposing each image as in the original code)
         blur_fn = lambda x: gaussian_filter(x, sigma=blur_sigma)
-        # Apply the Gaussian blur to each sample (note the transpose as in original code)
-        eta_re = np.stack([blur_fn(eta_re[i, :, :].T) for i in range(NTRAIN)]).astype('float32')
+        eta = np.stack([blur_fn(img.T) for img in eta]).astype('float32')
     
-    # Compute normalizing constants for eta
-    mean_eta = np.mean(eta_re, axis=0)
-    std_eta = np.std(eta_re)
-    eta_norm_constants = (mean_eta, std_eta)
-    
-    # Normalize eta data
-    eta_re -= mean_eta
-    eta_re /= std_eta
+    if normalize:
+        # Compute normalization constants
+        mean_eta = np.mean(eta, axis=0)
+        std_eta = np.std(eta)
+        # Normalize the data
+        eta = (eta - mean_eta) / std_eta
+        return eta, mean_eta, std_eta
+    else:
+        return eta
+        
+     
+def load_scatter_data(data_path, N, scatter_norm_constants=None):
+    """
+    Load and preprocess scatter data from an HDF5 file.
 
+    The scatter data file is assumed to contain both real and imaginary parts.
+    The real part is taken from keys[3], keys[4], keys[5] and the imaginary part
+    from keys[0], keys[1], keys[2] (after natural sorting the keys).
+
+    Parameters:
+        data_path (str): Path to the folder containing the scatter HDF5 file (e.g., 'scatter.h5').
+        N (int): Number of samples to load.
+        scatter_norm_constants (list of tuples or None): 
+            If None, compute per-channel normalization constants (mean and std), normalize the data,
+            and return both the normalized data and the computed constants.
+            If provided, it should be a list like [(mean0, std0), (mean1, std1), (mean2, std2)].
+            The function will then normalize the scatter data using these constants.
+
+    Returns:
+        If scatter_norm_constants is None:
+            scatter (np.ndarray): Normalized scatter data.
+            computed_norm_constants (list): List of (mean, std) tuples for each scatter channel.
+        Else:
+            scatter (np.ndarray): Normalized scatter data.
+    """
+    # Open the HDF5 file and read the keys in natural sorted order.
     with h5py.File(f'{data_path}/scatter.h5', 'r') as f:
-        # Sort the keys in natural order
         keys = natsort.natsorted(f.keys())
-
-        # Process real part of scatter data
-        tmp1 = f[keys[3]][:NTRAIN, :]
-        tmp2 = f[keys[4]][:NTRAIN, :]
-        tmp3 = f[keys[5]][:NTRAIN, :]
+        
+        # Process the real part from keys[3], keys[4], keys[5]
+        tmp1 = f[keys[3]][:N, :]
+        tmp2 = f[keys[4]][:N, :]
+        tmp3 = f[keys[5]][:N, :]
         scatter_re = np.stack((tmp1, tmp2, tmp3), axis=-1)
-
-        # Process imaginary part of scatter data
-        tmp1 = f[keys[0]][:NTRAIN, :]
-        tmp2 = f[keys[1]][:NTRAIN, :]
-        tmp3 = f[keys[2]][:NTRAIN, :]
+        
+        # Process the imaginary part from keys[0], keys[1], keys[2]
+        tmp1 = f[keys[0]][:N, :]
+        tmp2 = f[keys[1]][:N, :]
+        tmp3 = f[keys[2]][:N, :]
         scatter_im = np.stack((tmp1, tmp2, tmp3), axis=-1)
         
         # Combine real and imaginary parts along a new axis (second-to-last)
         scatter = np.stack((scatter_re, scatter_im), axis=-2).astype('float32')
 
-    # Compute normalizing constants for scatter for each channel and normalize
-    scatter_norm_constants = []
-    for ch in range(scatter.shape[-1]):
-        mean_ch = np.mean(scatter[:, :, :, ch])
-        std_ch = np.std(scatter[:, :, :, ch])
-        scatter_norm_constants.append((mean_ch, std_ch))
-        scatter[:, :, :, ch] = (scatter[:, :, :, ch] - mean_ch) / std_ch
+    # If no normalization constants are provided, compute them from the data.
+    if scatter_norm_constants is None:
+        computed_norm_constants = []
+        for ch in range(scatter.shape[-1]):
+            mean_ch = np.mean(scatter[:, :, :, ch])
+            std_ch = np.std(scatter[:, :, :, ch])
+            computed_norm_constants.append((mean_ch, std_ch))
+            scatter[:, :, :, ch] = (scatter[:, :, :, ch] - mean_ch) / std_ch
+        return scatter, computed_norm_constants
+    else:
+        # Normalize using the provided normalization constants.
+        for ch in range(scatter.shape[-1]):
+            mean_ch, std_ch = scatter_norm_constants[ch]
+            scatter[:, :, :, ch] = (scatter[:, :, :, ch] - mean_ch) / std_ch
+        return scatter
+       
+def create_dataset(eta, scatter, batch_size, repeat=True):
+    """
+    Create a TensorFlow dataset from eta and scatter data.
 
-    # Clean up temporary variables to free memory
-    del scatter_re, scatter_im, tmp1, tmp2, tmp3
+    The function builds a dictionary where:
+      - "x" corresponds to the eta data.
+      - "cond" is another dictionary with keys:
+          "channel:scatter0": scatter[..., 0],
+          "channel:scatter1": scatter[..., 1],
+          "channel:scatter2": scatter[..., 2].
+    
+    The dataset is then batched, prefetched, and optionally repeated.
 
-    return eta_re, scatter, eta_norm_constants, scatter_norm_constants
+    Parameters:
+        eta (np.ndarray): Array containing eta data.
+        scatter (np.ndarray): Array containing scatter data with at least 4 dimensions.
+        batch_size (int): The batch size for the dataset.
+        repeat (bool): If True, the dataset is repeated indefinitely.
 
+    Returns:
+        An iterator over the numpy batches from the dataset.
+    """
+    dict_data = {
+        "x": eta,
+        "cond": {
+            "channel:scatter0": scatter[:, :, :, 0],
+            "channel:scatter1": scatter[:, :, :, 1],
+            "channel:scatter2": scatter[:, :, :, 2]
+        }
+    }
+    
+    dataset = tf.data.Dataset.from_tensor_slices(dict_data)
+    if repeat:
+        dataset = dataset.repeat()
+    dataset = dataset.batch(batch_size)
+    dataset = dataset.prefetch(tf.data.AUTOTUNE)
+    return dataset.as_numpy_iterator()
 
