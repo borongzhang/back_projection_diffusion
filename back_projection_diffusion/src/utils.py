@@ -2,6 +2,9 @@ import numpy as np
 import jax.numpy as jnp
 from jax.experimental import sparse
 from scipy.ndimage import geometric_transform
+from scipy.ndimage import gaussian_filter
+import h5py
+import natsort
 
 def rotationindex(n):
     """
@@ -175,5 +178,72 @@ def compute_F_adj(freq):
         jnp.exp(1j * omega * ((p1[:, None] - q1[:, None]) * X_flat + (p2[:, None] - q2[:, None]) * Y_flat)) / 79**2
 
     return F.conj().T
+
+def load_and_preprocess_data(data_path, NTRAIN, neta, blur_sigma):
+    """
+    Load and preprocess eta (perturbation) and scatter data from the specified data path,
+    and return the normalizing constants used for both datasets.
+
+    Parameters:
+        data_path (str): Path to the folder containing 'eta.h5' and 'scatter.h5'.
+        NTRAIN (int): Number of training samples to load.
+        neta (int): The dimension used to reshape the eta data.
+        blur_sigma (float): Sigma value for the Gaussian blur.
+
+    Returns:
+        eta_re (np.ndarray): Preprocessed eta data.
+        scatter (np.ndarray): Preprocessed scatter data.
+        eta_norm_constants (tuple): (mean_eta, std_eta) used for eta normalization.
+        scatter_norm_constants (list of tuples): List containing (mean, std) for each scatter channel.
+    """
+
+    with h5py.File(f'{data_path}/eta.h5', 'r') as f:
+        # Read eta data from the first key, limit to NTRAIN samples and reshape
+        eta_re = f[list(f.keys())[0]][:NTRAIN, :].reshape(-1, neta, neta)
+        # Define a blur function using the provided sigma
+        blur_fn = lambda x: gaussian_filter(x, sigma=blur_sigma)
+        # Apply the Gaussian blur to each sample (note the transpose as in original code)
+        eta_re = np.stack([blur_fn(eta_re[i, :, :].T) for i in range(NTRAIN)]).astype('float32')
+    
+    # Compute normalizing constants for eta
+    mean_eta = np.mean(eta_re, axis=0)
+    std_eta = np.std(eta_re)
+    eta_norm_constants = (mean_eta, std_eta)
+    
+    # Normalize eta data
+    eta_re -= mean_eta
+    eta_re /= std_eta
+
+    with h5py.File(f'{data_path}/scatter.h5', 'r') as f:
+        # Sort the keys in natural order
+        keys = natsort.natsorted(f.keys())
+
+        # Process real part of scatter data
+        tmp1 = f[keys[3]][:NTRAIN, :]
+        tmp2 = f[keys[4]][:NTRAIN, :]
+        tmp3 = f[keys[5]][:NTRAIN, :]
+        scatter_re = np.stack((tmp1, tmp2, tmp3), axis=-1)
+
+        # Process imaginary part of scatter data
+        tmp1 = f[keys[0]][:NTRAIN, :]
+        tmp2 = f[keys[1]][:NTRAIN, :]
+        tmp3 = f[keys[2]][:NTRAIN, :]
+        scatter_im = np.stack((tmp1, tmp2, tmp3), axis=-1)
+        
+        # Combine real and imaginary parts along a new axis (second-to-last)
+        scatter = np.stack((scatter_re, scatter_im), axis=-2).astype('float32')
+
+    # Compute normalizing constants for scatter for each channel and normalize
+    scatter_norm_constants = []
+    for ch in range(scatter.shape[-1]):
+        mean_ch = np.mean(scatter[:, :, :, ch])
+        std_ch = np.std(scatter[:, :, :, ch])
+        scatter_norm_constants.append((mean_ch, std_ch))
+        scatter[:, :, :, ch] = (scatter[:, :, :, ch] - mean_ch) / std_ch
+
+    # Clean up temporary variables to free memory
+    del scatter_re, scatter_im, tmp1, tmp2, tmp3
+
+    return eta_re, scatter, eta_norm_constants, scatter_norm_constants
 
 
