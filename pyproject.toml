@@ -15,7 +15,8 @@ classifiers = [
   "Intended Audience :: Science/Research"
 ]
 keywords = [
-  "diffusion", "machine learning", "jax", "flax", "inverse scattering problem"
+  "diffusion", "machine learning", "jax", "flax",
+  "inverse scattering problem"
 ]
 dependencies = [
   # Install swirl-dynamics from a specific commit.
@@ -24,9 +25,9 @@ dependencies = [
   "matplotlib",
   "natsort",
   "pysteps",
-  "ott-jax==0.4.7"
+  "ott-jax==0.4.7",
+  "zenodo_get"  # Add zenodo_get here.
 ]
-
 
 [project.urls]
 homepage = "https://github.com/borongzhang/back_projection_diffusion"
