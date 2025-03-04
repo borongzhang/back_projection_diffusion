@@ -1,27 +1,33 @@
 import numpy as np
+import jax
 import jax.numpy as jnp
+from jax import Array
 from jax.experimental import sparse
+from jax.experimental.sparse import BCOO
 from scipy.ndimage import geometric_transform
 from scipy.ndimage import gaussian_filter
 import h5py
 import natsort
 import tensorflow as tf
 
-def rotation_index(n: int) -> jax.Array:
+
+def rotation_index(n: int) -> Array:
   """Creates an array of indices based on rotating rows and columns of a 2D array.
 
   Args:
     n: Dimension of the square grid (n x n).
 
   Returns:
-      jnp.ndarray: A concatenated array of rotation indices.
+    jnp.ndarray: A concatenated array of rotation indices.
   """
   index = jnp.reshape(jnp.arange(0, n**2, 1), [n, n])
     
   # Rotate the grid for each shift and concatenate the results.
-  return jnp.concatenate([jnp.roll(index, shift=[-i, -i], axis=[0, 1]) for i in range(n)], 0)
+  return jnp.concatenate(
+    [jnp.roll(index, shift=[-i, -i], axis=[0, 1]) for i in range(n)], 0
+  )
     
-def sparse_polar_to_cartesian(neta: int, nx: int) -> sparse.BCOO:
+def sparse_polar_to_cartesian(neta: int, nx: int) -> BCOO:
   """Converts a Cartesian grid to polar coordinates and creates a sparse matrix.
 
   Args:
@@ -29,7 +35,7 @@ def sparse_polar_to_cartesian(neta: int, nx: int) -> sparse.BCOO:
     nx: The size of the polar grid (nx x nx).
 
   Returns:
-    sparse.BCOO: A sparse matrix in BCOO format representing the transformation.
+    BCOO: A sparse matrix in BCOO format representing the transformation.
   """
   def shift_func(coords: tuple) -> tuple:
     """Transforms Cartesian coordinates to polar coordinates.
@@ -74,9 +80,9 @@ def sparse_polar_to_cartesian(neta: int, nx: int) -> sparse.BCOO:
   # Thresholds the matrix to remove small values.
   cart_mat = np.where(np.abs(cart_mat) > 0.001, cart_mat, 0)
   # Converts the dense matrix to a sparse BCOO format.
-  return sparse.BCOO.fromdense(cart_mat)
+  return BCOO.fromdense(cart_mat)
 
-def sparse_cartesian_to_polar(neta: int, nx: int) -> sparse.BCOO:
+def sparse_cartesian_to_polar(neta: int, nx: int) -> BCOO:
   """Converts a polar grid to a cartesian grid and creates a sparse matrix.
 
   Args:
@@ -84,8 +90,8 @@ def sparse_cartesian_to_polar(neta: int, nx: int) -> sparse.BCOO:
     nx: The size of the polar grid (nx x nx).
 
   Returns:
-    sparse.BCOO: A sparse matrix in BCOO format representing the
-      transformation from polar to cartesian coordinates.
+    BCOO: A sparse matrix in BCOO format representing the transformation from
+      polar to cartesian coordinates.
   """
   def shift_func(coords: tuple) -> tuple:
     """Transforms polar coordinates to cartesian coordinates.
@@ -113,8 +119,7 @@ def sparse_cartesian_to_polar(neta: int, nx: int) -> sparse.BCOO:
       # Create a dummy matrix with a single pixel set to 1 at (i, j).
       mat_dummy = np.zeros((neta, neta))
       mat_dummy[i, j] = 1
-      # Map each output point to input coordinates using spline 
-      # interpolation.
+      # Map each output point to input coordinates using spline interpolation.
       polar_mat[:, i, j] = geometric_transform(
         mat_dummy,
         shift_func,
@@ -127,8 +132,7 @@ def sparse_cartesian_to_polar(neta: int, nx: int) -> sparse.BCOO:
   # Threshold the matrix to remove small values.
   polar_mat = np.where(np.abs(polar_mat) > 0.001, polar_mat, 0)
   # Convert the dense matrix to a sparse BCOO format.
-  return sparse.BCOO.fromdense(polar_mat)
-
+  return BCOO.fromdense(polar_mat)
 
 def compute_f_adj(freq: float) -> jnp.ndarray:
   """Computes the analytical adjoint of the forward map for nx = neta = 80.
@@ -163,7 +167,6 @@ def compute_f_adj(freq: float) -> jnp.ndarray:
                               Y_flat)) / 79**2)
   return F.conj().T
 
-
 def load_eta_data(data_path: str, N: int, blur_sigma: float,
                   normalize: bool = False):
   """Loads and processes η data from an HDF5 file.
@@ -172,8 +175,8 @@ def load_eta_data(data_path: str, N: int, blur_sigma: float,
     data_path: Path to the folder containing 'eta.h5'.
     N: Number of samples to load.
     blur_sigma: Sigma value for the gaussian blur.
-    normalize: If True, normalizes the data and returns the
-      normalization constants.
+    normalize: If True, normalizes the data and returns the normalization
+      constants.
 
   Returns:
     If normalize is True:
@@ -201,13 +204,12 @@ def load_eta_data(data_path: str, N: int, blur_sigma: float,
   else:
     return eta
 
-
 def load_scatter_data(data_path: str, N: int,
                       scatter_norm_constants: list = None):
   """Loads and processes scatter data from an HDF5 file.
 
-  The file is assumed to contain real parts (keys 3, 4, 5) and imaginary
-  parts (keys 0, 1, 2) after natural sorting of keys.
+  The file is assumed to contain real parts (keys 3, 4, 5) and imaginary parts
+  (keys 0, 1, 2) after natural sorting of keys.
 
   Args:
     data_path: Path to the folder containing the scatter HDF5 file.
@@ -252,7 +254,6 @@ def load_scatter_data(data_path: str, N: int,
       scatter[:, :, :, ch] = (scatter[:, :, :, ch] - mean_ch) / std_ch
     return scatter
 
-
 def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
                    repeat: bool = True):
   """Creates a tensorflow dataset from eta and scatter data.
@@ -283,4 +284,3 @@ def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
   dataset = dataset.batch(batch_size)
   dataset = dataset.prefetch(tf.data.AUTOTUNE)
   return dataset.as_numpy_iterator()
-
