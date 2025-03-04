@@ -1,15 +1,15 @@
 # Back-Projection Diffusion
 This repository contains the code for the main models described in “Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models”, which is available on [ArXiv](https://arxiv.org/abs/2408.02866). The paper is authored by [Borong Zhang](https://borongzhang.com/), [Martín Guerra](https://sites.google.com/wisc.edu/martinguerra/), [Qin Li](https://sites.google.com/view/qinlimadison/home), and [Leonardo Zepeda-Núñez](https://research.google/people/leonardozepedanez/?&type=google). This repository is written by Borong Zhang.
 
-We present Wideband back-projection diffusion, an end-to-end probabilistic framework for approximating the posterior distribution induced by the inverse scattering map from wideband scattering data. 
+We present Wideband Back-Projection Diffusion, an end-to-end probabilistic framework for approximating the posterior distribution of the refractive index using the wideband scattering data through the inverse scattering map.
 
 <img width="1228" alt="prelim" src="https://github.com/user-attachments/assets/e21c10e4-a451-424e-a7c2-a785a207a4d4" />
 
-This framework leverages conditional diffusion models coupled with the underlying physics of wave-propagation and symmetries in the problem, to produce highly accurate reconstructions. The framework introduces a factorization of the score function into a physics-based latent representation inspired by the filtered back-propagation formula and a conditional score function conditioned on this latent representation. 
+This framework produces highly accurate reconstructions, leveraging conditional diffusion models to draw samples, and also honors the symmetries of the underlying physics of wave-propagation. The procedure is factored into two steps, with the first, inspired by the filtered back-propagation formula, transforms data into a physics-based latent representation, while the second learns a conditional score function conditioned on this latent representation.
 
 <img width="1121" alt="diagram" src="https://github.com/user-attachments/assets/add61dfe-a3cb-4d4f-8cb0-b923293d5134" />
 
-These two steps are also constrained to obey symmetries in the formulation while being amenable to compression by imposing the rank structure found in the filtered back-projection formula. As a result, empirically, our framework is able to provide sharp reconstructions effortlessly, even recovering sub-Nyquist features in the multiple-scattering regime. It has low-sample and computational complexity, its number of parameters scales sub-linearly with the target resolution, and it has stable training dynamics.
+These two steps individually obey their associated symmetries and are amenable to compression by imposing the rank structure found in the filtered back-projection formula. Empirically, our framework has both low sample and computational complexity, with its number of parameters scaling only sub-linearly with the target resolution, and has stable training dynamics. It provides sharp reconstructions effortlessly and is capable of recovering even sub-Nyquist features in the multiple-scattering regime.
 
 ## Enviroment Setup
 Project Environment can be installed by 
@@ -74,7 +74,7 @@ The Brain MRI images used as our perturbations were obtained from the [NYU fastM
 
 We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
 
-We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution. To download the dataset, simply run:
+We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution. To download the dataset, please run:
 ```
 zenodo_get 14760123
 ```
