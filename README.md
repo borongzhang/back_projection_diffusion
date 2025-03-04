@@ -26,7 +26,10 @@ Demos for `EquiNet-CNN`, `B-EquiNet-CNN`, `Analytical-CNN` and `SwitchNet-CNN` t
 ### Sample Dataset and Trained Model Parameters
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14911327.svg)](https://doi.org/10.5281/zenodo.14911327)
 
-We make a sample dataset publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14911327). 
+We make a sample dataset and corresponding trained model parameters publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14911327). To download the dataset and trained model parameters, simply run:
+```
+zenodo_get 14911327
+```
 
 After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
 
@@ -71,7 +74,10 @@ The Brain MRI images used as our perturbations were obtained from the [NYU fastM
 
 We padded, resized, and normalized the perturbations to a native resolution of $n_\eta = 240$ points. Then, we downsampled the perturbations to resolutions of $n_\eta = 60$, $80$, $120$, and $160$.
 
-We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution.
+We make the processed MRI brain perturbations publicly available [via Zenodo](https://doi.org/10.5281/zenodo.14760123). The perturbations are stored as HDF5 files, with filenames in the format `eta-n.h5`, where `n` corresponds to the resolution. To download the dataset, simply run:
+```
+zenodo_get 14760123
+```
 
 ### Scattering Data Generation
 Scattering data can be generated using the `data_generation.m` script.
