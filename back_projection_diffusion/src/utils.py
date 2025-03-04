@@ -5,6 +5,7 @@ from scipy.ndimage import geometric_transform
 from scipy.ndimage import gaussian_filter
 import h5py
 import natsort
+import tensorflow as tf
 
 def rotationindex(n):
     """
