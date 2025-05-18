@@ -105,16 +105,20 @@ This repository makes use of code from the following sources:
 4. The structure of the repository is inspired by Owen Melia and Olivia Tsang‘s [repository](https://github.com/meliao/MFISNets/).
 
 ## Citation
-If this code is useful to your research, please cite our preprint:
+If this code is useful to your research, please cite our paper:
 ```
-@misc{zhang2024backprojectiondiffusionsolvingwideband,
-      title={Back-Projection Diffusion: Solving the Wideband Inverse Scattering Problem with Diffusion Models}, 
-      author={Borong Zhang and Martín Guerra and Qin Li and Leonardo Zepeda-Núñez},
-      year={2024},
-      eprint={2408.02866},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2408.02866}, 
+@article{ZHANG2025118036,
+title = {Back-Projection Diffusion: Solving the wideband inverse scattering problem with diffusion models},
+journal = {Computer Methods in Applied Mechanics and Engineering},
+volume = {443},
+pages = {118036},
+year = {2025},
+issn = {0045-7825},
+doi = {https://doi.org/10.1016/j.cma.2025.118036},
+url = {https://www.sciencedirect.com/science/article/pii/S0045782525003081},
+author = {Borong Zhang and Martin Guerra and Qin Li and Leonardo Zepeda-Núñez},
+keywords = {Machine learning, Inverse scattering, Generative modeling, Wave propagation, Diffusion models},
+abstract = {We present Wideband Back-Projection Diffusion, an end-to-end probabilistic framework for approximating the posterior distribution induced by the inverse scattering map from wideband scattering data. This framework produces highly accurate reconstructions, leveraging conditional diffusion models to draw samples, and also honors the symmetries of the underlying physics of wave-propagation. The procedure is factored into two steps: the first step, inspired by the filtered back-propagation formula, transforms data into a physics-based latent representation, while the second step learns a conditional score function conditioned on this latent representation. These two steps individually obey their associated symmetries and are amenable to compression by imposing the rank structure found in the filtered back-projection formula. Empirically, our framework has both low sample and computational complexity, with its number of parameters scaling only sub-linearly with the target resolution, and has stable training dynamics. It provides sharp reconstructions effortlessly and is capable of recovering even sub-Nyquist features in the multiple-scattering regime.}
 }
 ```
 
