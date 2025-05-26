@@ -147,8 +147,9 @@ def compute_f_adj(freq: float) -> jnp.ndarray:
 
   X, Y = jnp.meshgrid(jnp.linspace(0, 1, 80) - 0.5,
                       jnp.linspace(0, 1, 80) - 0.5)
-  pa, qa = jnp.meshgrid(jnp.linspace(jnp.pi, 3 * jnp.pi, 80),
-                        jnp.linspace(jnp.pi, 3 * jnp.pi, 80))
+  dtheta = 2*jnp.pi/80
+  pa, qa = jnp.meshgrid(jnp.linspace(jnp.pi, 3 * jnp.pi - dtheta, 80),
+                        jnp.linspace(jnp.pi, 3 * jnp.pi - dtheta, 80))
 
   p1 = jnp.cos(pa).ravel()
   p2 = jnp.sin(pa).ravel()
@@ -158,10 +159,10 @@ def compute_f_adj(freq: float) -> jnp.ndarray:
   X_flat = X.ravel()
   Y_flat = Y.ravel()
 
-  # Compute the complex exponential components.
+  # Compute the complex exponential components (up to a constant).
   F = (jnp.exp(1j * jnp.pi / 4) / jnp.sqrt(8 * jnp.pi * omega) *
        (omega**2 * jnp.exp(1j * omega * 0.5) / jnp.sqrt(0.5)) *
-       jnp.exp(1j * omega * ((p1[:, None] - q1[:, None]) *
+       jnp.exp(-1j * omega * ((p1[:, None] - q1[:, None]) *
                               X_flat +
                               (p2[:, None] - q2[:, None]) *
                               Y_flat)) / 79**2)
