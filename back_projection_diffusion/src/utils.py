@@ -197,9 +197,10 @@ def load_eta_data(data_path: str, N: int, blur_sigma: float,
   if normalize:
     # Compute normalization constants.
     mean_eta = np.mean(eta, axis=0)
-    std_eta = np.std(eta)
+    eta -= mean_eta
     # Normalize the data.
-    eta = (eta - mean_eta) / std_eta
+    std_eta = np.std(eta)
+    eta /= std_eta
     return eta, mean_eta, std_eta
   else:
     return eta
