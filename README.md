@@ -31,7 +31,8 @@ We make a sample dataset and corresponding trained model parameters publicly ava
 zenodo_get 14911327
 ```
 
-After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped.
+After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped. **Note: the model has been updated, so the parameters in `tmp` are no longer compatible and should not be used.**
+
 
 To change the data directory, modify `training_data_path` and `test_data_path`. To change the directory for the trained model parameters, modify `cond_workdir`.
 The following is the default directory structure for the `back_projection_diffusion` project:
