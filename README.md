@@ -31,7 +31,9 @@ We make a sample dataset and corresponding trained model parameters publicly ava
 zenodo_get 14911327
 ```
 
-After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped. **Note: the model has been updated, so the parameters in `tmp` are no longer compatible with the current version and should not be used. To use them, please revert to commit `35618f1877039f2268eeef2a24b7168ce32282e2`.**
+After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped. 
+
+**Note: the model has been updated, so the parameters in `tmp` are no longer compatible with the current version and should not be used. To use them, please revert to `commit 35618f1`, whose full SHA is `35618f1877039f2268eeef2a24b7168ce32282e2`.**
 
 
 To change the data directory, modify `training_data_path` and `test_data_path`. To change the directory for the trained model parameters, modify `cond_workdir`.
