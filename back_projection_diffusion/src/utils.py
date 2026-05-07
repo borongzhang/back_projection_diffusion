@@ -261,7 +261,7 @@ def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
   """Creates a tensorflow dataset from eta and scatter data.
 
   The dictionary 'x' contains the eta data and 'cond' contains the scatter
-  channels.
+  channels. When repeat=True (training), the dataset is shuffled before batching.
 
   Args:
     eta: Array containing eta data.
@@ -282,6 +282,9 @@ def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
   }
   dataset = tf.data.Dataset.from_tensor_slices(dict_data)
   if repeat:
+    dataset = dataset.shuffle(
+      buffer_size=eta.shape[0], reshuffle_each_iteration=True
+    )
     dataset = dataset.repeat()
   dataset = dataset.batch(batch_size)
   dataset = dataset.prefetch(tf.data.AUTOTUNE)
