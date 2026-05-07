@@ -281,7 +281,6 @@ def create_dataset(eta: np.ndarray, scatter: np.ndarray, batch_size: int,
     }
   }
   dataset = tf.data.Dataset.from_tensor_slices(dict_data)
-  dataset = dataset.shuffle(buffer_size=eta.shape[0], reshuffle_each_iteration=True)
   if repeat:
     dataset = dataset.shuffle(
       buffer_size=eta.shape[0], reshuffle_each_iteration=True
