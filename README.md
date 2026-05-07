@@ -83,8 +83,16 @@ zenodo_get 14760123
 ```
 
 ### Scattering Data Generation
-Scattering data can be generated using the `data_generation.m` script.
-The dimension, size, and frequencies of the data should be specified in the `setup scaling parameters` section. The generated scattering data will be stored as an HDF5 file with the following structure:
+
+Scattering data can be generated using either the original MATLAB script or the Python/JAX-facing forward scattering code in `data_generation/`.
+
+- The MATLAB workflow uses `data_generation.m`.
+- The Python workflow uses the forward scattering operator in `data_generation/jax_scattering_forward/`.
+
+The Python implementation provides the forward scattering map, Jacobian application, and adjoint-Jacobian application. 
+
+For both workflows, the dimension, size, and frequencies of the data should be set in the corresponding configuration section. The generated scattering data should be stored as an HDF5 file with the following structure:
+
 ```
 scatter.h5/
       ├── /scatter_imag_freq_1
@@ -93,6 +101,7 @@ scatter.h5/
       ├── /scatter_real_freq_2
       ├── /scatter_imag_freq_3
       ├── /scatter_real_freq_3
+
 ```
 
 To use, place the `eta.h5` and `scatter.h5` files into a folder, then move that folder to the `data` directory.
@@ -106,6 +115,7 @@ This repository makes use of code from the following sources:
 2. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
 3. Original data generation code was provided by the authors of [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276).
 4. The structure of the repository is inspired by Owen Melia and Olivia Tsang‘s [repository](https://github.com/meliao/MFISNets/).
+5. The Python/JAX forward scattering code in `data_generation/jax_scattering_forward/` is adapted from Martín Guerra’s [`Inverse_Scattering`](https://github.com/maguerrap/Inverse_Scattering) repository.
 
 ## Citation
 If this code is useful to your research, please cite our paper:
