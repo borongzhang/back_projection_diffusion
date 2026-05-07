@@ -31,9 +31,9 @@ We make a sample dataset and corresponding trained model parameters publicly ava
 zenodo_get 14911327
 ```
 
-After downloading the data, by default, please place the datasets in a `data` folder. Optionally, the `tmp` folder—which contains the trained model parameters—can be downloaded and placed in the `examples` folder.  If the trained model parameters in `tmp` are loaded, the training scripts will be automatically skipped. 
+After downloading the data, place the datasets in the `data` folder unless you configure a different data path. A legacy `tmp` folder is also available from Zenodo. This folder contains pretrained model parameters and, for compatible versions of the code, can be placed in the `examples` folder. When compatible pretrained parameters are found in `tmp`, the corresponding training scripts are skipped automatically. 
 
-**Note: the model has been updated, so the parameters in `tmp` are no longer compatible with the current version and should not be used. To use them, please revert to `commit 35618f1`, whose full SHA is `35618f1877039f2268eeef2a24b7168ce32282e2`.**
+**Note.** The model has been updated, so the pretrained parameters in the Zenodo `tmp` folder are no longer compatible with the current version of this repository and should not be used with the latest code. To use the Zenodo parameters, please revert to commit `35618f1` (`35618f1877039f2268eeef2a24b7168ce32282e2`). For the current version, `EquiNet-CNN` has been retrained, and the updated pretrained parameters are included in this repository at `tmp/equinet_cnn_10hsquares`.
 
 
 To change the data directory, modify `training_data_path` and `test_data_path`. To change the directory for the trained model parameters, modify `cond_workdir`.
