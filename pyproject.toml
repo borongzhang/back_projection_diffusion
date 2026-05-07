@@ -21,6 +21,17 @@ keywords = [
 dependencies = [
   # Install swirl-dynamics from a specific commit.
   "swirl-dynamics @ git+https://github.com/google-research/swirl-dynamics.git@057c93cebc3c8ccac996bc5a5b49c88e3e39c4b0",
+  "jax==0.5.0",
+  "jaxlib==0.5.0",
+  "flax<0.11",
+  "optax<0.2.5",
+  "chex<0.1.90",
+  "orbax-checkpoint<0.11",
+  "lineax<0.0.8",
+  "clu",
+  "tensorboard",
+  "ml-collections",
+  "absl-py",
   "jupyter",
   "matplotlib",
   "natsort",
