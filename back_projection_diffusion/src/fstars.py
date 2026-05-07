@@ -3,7 +3,6 @@ import jax
 import jax.numpy as jnp
 from jax.experimental import sparse
 import flax.linen as nn
-from numpy import cos, sin, exp, newaxis
 
 
 class AnalyticalFstar(nn.Module):

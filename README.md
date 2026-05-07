@@ -11,7 +11,7 @@ This framework produces highly accurate reconstructions, leveraging conditional 
 
 These two steps individually obey their associated symmetries and are amenable to compression by imposing the rank structure found in the filtered back-projection formula. Empirically, our framework has both low sample and computational complexity, with its number of parameters scaling only sub-linearly with the target resolution, and has stable training dynamics. It provides sharp reconstructions effortlessly and is capable of recovering even sub-Nyquist features in the multiple-scattering regime.
 
-## Enviroment Setup
+## Environment Setup
 Project Environment can be installed by 
 ```
 conda create -n back_projection_diffusion python=3.11 
