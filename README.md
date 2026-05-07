@@ -84,12 +84,10 @@ zenodo_get 14760123
 
 ### Scattering Data Generation
 
-Scattering data can be generated using either the original MATLAB script or the Python/JAX-facing forward scattering code in `data_generation/`.
+Scattering data can be generated using either the MATLAB workflow or the Python/JAX forward scattering workflow in `data_generation/`.
 
-- The MATLAB workflow uses `data_generation.m`.
-- The Python workflow uses the forward scattering operator in `data_generation/jax_scattering_forward/`.
-
-The Python implementation provides the forward scattering map, Jacobian application, and adjoint-Jacobian application. 
+- The MATLAB workflow is in `data_generation/matlab_forward_scattering/`. It includes `data_generation.m` for generating scattering data and separate scripts for generating perturbations.
+- The Python/JAX workflow is in `data_generation/jax_forward_scattering/` and provides the forward scattering map, Jacobian application, and adjoint-Jacobian application.
 
 For both workflows, the dimension, size, and frequencies of the data should be set in the corresponding configuration section. The generated scattering data should be stored as an HDF5 file with the following structure:
 
@@ -115,7 +113,7 @@ This repository makes use of code from the following sources:
 2. [Random Shepp-Logan Phantom](https://github.com/matthiaschung/Random-Shepp-Logan-Phantom) by Matthias Chung, which was used for generating the `Shepp-Logan` dataset.
 3. Original data generation code was provided by the authors of [Wide-Band Butterfly Network](https://epubs.siam.org/doi/10.1137/20M1383276).
 4. The structure of the repository is inspired by Owen Melia and Olivia Tsang‘s [repository](https://github.com/meliao/MFISNets/).
-5. The Python/JAX forward scattering code in `data_generation/jax_scattering_forward/` is adapted from Martín Guerra’s [Inverse_Scattering](https://github.com/maguerrap/Inverse_Scattering) repository.
+5. The Python/JAX forward scattering code in `data_generation/jax_forward_scattering/` is adapted from Martín Guerra’s [Inverse_Scattering](https://github.com/maguerrap/Inverse_Scattering) repository.
 
 ## Citation
 If this code is useful to your research, please cite our paper:
