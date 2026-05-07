@@ -9,8 +9,8 @@ from scipy.interpolate import RegularGridInterpolator
 from scipy.sparse import csr_matrix, diags
 from scipy.sparse.linalg import spsolve
 
-from base import BaseOperator
-from scipy_finite_difference import (
+from .base import BaseOperator
+from .scipy_finite_difference import (
     adjoint_extend_model,
     extend_model,
     helmholtz_matrix_off_diagonal,
